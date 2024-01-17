@@ -1,0 +1,84 @@
+name: SimpleApp
+
+# Customize build settings
+setings:
+  SWIFT_VERSION: 5.0
+  CODE_SIGN_IDENTITY: "iPhone Developer"
+  ARCHS: ${ARCHS_STANDARDS}
+
+options:
+  xcodeVersion: "15.0" # The version of Xcode. This defaults to the latest version periodically
+  deploymentTarget: # A project wide deployment target can be specified for each platform otherwise the default SDK version in Xcode will be used.
+    iOS: 16.0
+
+packages:
+  # Remote packages
+  Factory:
+    url: https://github.com/hmlongco/Factory
+    from: 2.3.1
+  # Local packages
+  Data:
+    path: Data
+  Domain:
+    path: Domain
+  Styleguide:
+    path: Styleguide
+  Posts:
+    path: Posts
+
+targets:
+  SimpleApp:
+    platform: iOS
+    type: application
+    sources:
+      - path: SimpleApp
+    info:
+      path: SimpleApp/Resources/Info.plist
+      properties:
+        UILaunchScreen:
+          UILaunchScreen: {}
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: true
+          UISceneConfigurations: {}
+        UIApplicationSupportsIndirectInputEvents: true
+        LSRequiresIPhoneOS: true
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.moryta.SimpleAppDev
+      CODE_SIGN_STYLE: "Manual"
+      DEVELOPMENT_TEAM: "*"
+      PROVISIONING_PROFILE: "Wildcard"
+    dependencies:
+      # Remote packages
+      - package: Factory
+      # Local packages
+      - package: Data
+      - package: Domain
+      - package: Styleguide
+      - package: Posts
+
+  SimpleAppTests:
+    platform: iOS
+    type: bundle.unit-test
+    sources:
+      - path: SimpleAppTests
+    dependencies:
+      - target: SimpleApp
+  
+schemes:
+  Debug:
+    build:
+      targets:
+        SimpleApp: [run, test]
+      parallelizeBuild: true
+      buildImplicitDependencies: true
+    run:
+      config: Debug
+    tests:
+      config: Debug
+      gatherCoverageData: true
+      coverageTargets:
+        - SimpleApp
+      targets:
+        - SimpleAppTests
+

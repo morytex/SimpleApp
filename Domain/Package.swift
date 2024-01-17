@@ -9,25 +9,9 @@ let package = Package(
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "Entities",
-            targets: ["Entities"]
+            name: "Domain",
+            targets: ["Entities", "RepositoryProtocol", "UseCaseProtocol", "UseCases", "DomainTestHelpers"]
         ),
-        .library(
-            name: "RepositoryProtocol",
-            targets: ["RepositoryProtocol"]
-        ),
-        .library(
-            name: "UseCaseProtocol",
-            targets: ["UseCaseProtocol"]
-        ),
-        .library(
-            name: "UseCases",
-            targets: ["UseCases"]
-        ),
-        .library(
-            name: "DomainTestHelpers",
-            targets: ["DomainTestHelpers"]
-        )
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -58,6 +42,6 @@ let package = Package(
                 "UseCaseProtocol",
                 "RepositoryProtocol"
             ]
-        )
+        ),
     ]
 )

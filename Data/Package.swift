@@ -9,16 +9,12 @@ let package = Package(
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "NetworkCore",
-            targets: ["NetworkCore"]
+            name: "Data",
+            targets: ["NetworkCore", "Repositories"]
         ),
-        .library(
-            name: "Repositories",
-            targets: ["Repositories"]
-        )
     ],
     dependencies: [
-        .package(name: "Domain", path: "../Domain")
+        .package(name: "Domain", path: "../Domain"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -31,9 +27,8 @@ let package = Package(
             name: "Repositories",
             dependencies: [
                 "NetworkCore",
-                .product(name: "Entities", package: "Domain"),
-                .product(name: "RepositoryProtocol", package: "Domain")
+                .product(name: "Domain", package: "Domain"),
             ]
-        )
+        ),
     ]
 )
