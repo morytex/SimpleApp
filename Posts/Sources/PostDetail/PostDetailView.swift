@@ -25,6 +25,8 @@ public struct PostDetailView: View {
     }
 }
 
-#Preview {
-    PostDetailView(url: "https://google.com")
+struct PostDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        PostDetailView(url: "https://google.com")
+    }
 }

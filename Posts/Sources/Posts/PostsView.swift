@@ -38,7 +38,9 @@ public struct PostsView: View {
 #if DEBUG
 import DomainTestHelpers
 
-#Preview {
-    PostsView(viewModel: PostsViewModel(getPostsUseCase: MockGetPostsUseCase()))
+struct PostsView_Previews: PreviewProvider {
+    static var previews: some View {
+        PostsView(viewModel: PostsViewModel(getPostsUseCase: MockGetPostsUseCase()))
+    }
 }
 #endif
